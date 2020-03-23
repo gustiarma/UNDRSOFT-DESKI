@@ -35,7 +35,8 @@ class SiswaController extends Controller
     public function getInfo(Request $request)
     {
         try {
-            $info =  User::find(Auth::id())->infoSiswa;
+            // $info =  User::find(Auth::id())->infoSiswa;
+            $info =  User::with('InfoSiswa')->find(Auth::id());
             return response([
                 'success' => true,
                 'data' => $info

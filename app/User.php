@@ -41,6 +41,7 @@ class User extends Authenticatable
     public function infoSiswa()
     {
         return $this->hasOne('App\Model\InfoSiswa', 'id_siswa', 'id');
+        // return $this->belongsTo('App\Model\InfoSiswa');
     }
 
     // public $timestamps = false;
