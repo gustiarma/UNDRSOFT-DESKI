@@ -16,13 +16,16 @@ class UserObserver
      */
     public function created(User $user)
     {
-
+        $religion = array(
+            'Islam','Kristen', 'Hindu', 'Budha', 'Konghucu'
+        );
         $faker = Faker::create('id_id');
         if ($user->level == 'SISWA') {
             $userInfo = new InfoSiswa;
             $userInfo->id_siswa = $user->id;
             $userInfo->nomor_hp = $faker->phoneNumber;
             $userInfo->alamat = $faker->streetAddress;
+            $userInfo->agama = $religion[array_rand($religion)];
             $userInfo->foto = 'https://i.pravatar.cc/150?img=' . $user->id;
             $userInfo->save();
         }

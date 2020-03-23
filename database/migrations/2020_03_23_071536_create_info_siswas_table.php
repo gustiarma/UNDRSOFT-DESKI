@@ -18,6 +18,7 @@ class CreateInfoSiswasTable extends Migration
             $table->integer('id_siswa');
             $table->string('nomor_induk')->nullable();
             $table->string('nomor_hp')->nullable();
+            $table->string('agama')->nullable();
             $table->string('alamat')->nullable();
             $table->integer('id_orangtua')->nullable();
             $table->string('foto')->nullable();
