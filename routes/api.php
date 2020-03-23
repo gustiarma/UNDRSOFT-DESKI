@@ -23,4 +23,7 @@ Route::post('getToken', 'AuthController@getToken');
 Route::group(['prefix' => 'siswa'], function () {
     Route::get('list', 'SiswaController@listSiswa');
     Route::middleware('auth:api')->get('info', 'SiswaController@getInfo');
+
+    // random
+    Route::get('random', 'SiswaController@random');
 });

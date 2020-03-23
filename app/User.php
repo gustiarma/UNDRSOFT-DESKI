@@ -19,13 +19,14 @@ class User extends Authenticatable
         'name', 'email', 'password', 'level', 'api_token',
     ];
 
+    public $timestamps = false;
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'api_token','update_at','create_at'
+        'password', 'remember_token', 'api_token','updated_at','created_at'
     ];
 
     /**
@@ -43,6 +44,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Model\InfoSiswa', 'id_siswa', 'id');
         // return $this->belongsTo('App\Model\InfoSiswa');
     }
+
+    public function infoKelas(){
+        return $this->hasOne('App\Model\KelasRelasi','id_siswa','id');
+    }
+
 
     // public $timestamps = false;
 }
