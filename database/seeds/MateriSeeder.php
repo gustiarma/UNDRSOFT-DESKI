@@ -16,6 +16,7 @@ class MateriSeeder extends Seeder
         foreach ($this->listMatapelajaran() as $materi) {
             MataPelajaran::create([
                 'nama' => $materi[0],
+                'icon'=>'https://picsum.photos/200',
                 'kode' => $materi[1],
             ]);
         }

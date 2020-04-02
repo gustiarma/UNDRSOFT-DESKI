@@ -17,6 +17,7 @@ class CreateMataPelajaransTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('kode')->nullable();
+            $table->string('icon')->nullable();
             $table->string('deskripsi')->nullable();
             $table->string('kode_materi')->nullable();
             $table->integer('kode_pengajar')->nullable();
