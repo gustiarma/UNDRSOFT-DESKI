@@ -41,7 +41,7 @@ class SiswaController extends Controller
         try {
             // $info =  User::find(Auth::id())->infoSiswa;
             // $info =  User::with('InfoSiswa')::with('KelasRelasi')->find(Auth::id());
-            $user = User::find('1');
+            $user = User::find(Auth::id());
             $infoSiswa = InfoSiswa::where('id_siswa', $user->id)->first();
             $infoOrtu = User::where('id', $infoSiswa->id_orangtua)->first();
             $data = [

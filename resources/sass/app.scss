@@ -1,8 +1,27 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+/*=========================================================================================
+  File Name: app.scss
+  Description: Write your custom scss
+  ----------------------------------------------------------------------------------------
+  Item Name: Vuesax Admin - VueJS Dashboard Admin Template
+  Author: Pixinvent
+  Author URL: hhttp://www.themeforest.net/user/pixinvent
+==========================================================================================*/
 
-// Variables
-@import 'variables';
+@import "tailwindcss/base";
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+@import 'main';
+@import '../assets/css/iconfont.css';
+@import '../../node_modules/prismjs/themes/prism-tomorrow.css';
+
+// mport '../../node_modules/material-icons/iconfont/material-icons.css'
+
+
+
+// <link rel="stylesheet" href="{{ asset(mix('css/material-icons/material-icons.css')) }}">
+// <link rel="stylesheet" href="{{ asset(mix('css/vuesax.css')) }}">
+
+

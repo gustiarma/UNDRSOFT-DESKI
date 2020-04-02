@@ -16,7 +16,7 @@ class KelasSeeder extends Seeder
             $kelas = new Kelas;
             $kelas->nama_kelas = 'Kelas ' . $i;
             $kelas->save();
-            # code...
+
         }
 
 

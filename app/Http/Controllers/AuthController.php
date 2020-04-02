@@ -16,7 +16,8 @@ class AuthController extends Controller
         if (Auth::attempt($data) == true) {
             return response([
                 'success' => true,
-                'api_token' => Auth::user()->api_token
+                'api_token' => Auth::user()->api_token,
+                'user_data'=>Auth::user()
             ], 200);
         }else{
             return response([
