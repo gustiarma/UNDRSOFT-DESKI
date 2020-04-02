@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             KelasSeeder::class,
             KelasRelasiSeeder::class,
+            MateriSeeder::class,
         ]);
     }
 }

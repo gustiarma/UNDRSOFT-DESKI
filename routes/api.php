@@ -19,6 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('getToken', 'AuthController@getToken');
 
+Route::group(['prefix' => 'pelajaran'], function () {
+
+    Route::get('list','MataPelajaranController@index');
+
+});
+
 
 Route::group(['prefix' => 'siswa'], function () {
     Route::get('list', 'SiswaController@listSiswa');
