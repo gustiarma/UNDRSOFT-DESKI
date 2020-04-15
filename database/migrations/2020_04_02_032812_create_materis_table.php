@@ -14,9 +14,9 @@ class CreateMaterisTable extends Migration
     public function up()
     {
         Schema::create('bahanajar', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->string('kode')->nullable();
+            $table->uuid('id')->primary();
+            $table->string('name');
+            $table->uuid('kode')->nullable();
             $table->string('link')->nullable();
 
             $table->timestamps();

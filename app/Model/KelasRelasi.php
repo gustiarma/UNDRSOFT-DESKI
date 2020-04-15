@@ -6,15 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class KelasRelasi extends Model
 {
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
+    public $incrementing = false;
+
+    protected $casts = [
+        'id' => 'string',
+
+    ];
+
     protected $table = 'kelas_relasi';
     public $fillable = ['id_siswa', 'id_kelas'];
     protected $hidden = [
-    'updated_at', 'created_at'
+        'updated_at', 'created_at'
     ];
     // public function user(){
     //     return $this->belongsTo('User');
     // }
-    public function detailKelas(){
-        return $this->belongsTo('App\Model\Kelas','id_kelas','id');
+    public function detailKelas()
+    {
+        return $this->belongsTo('App\Model\Kelas', 'id_kelas', 'id');
     }
 }

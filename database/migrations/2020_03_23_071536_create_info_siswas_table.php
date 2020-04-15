@@ -14,13 +14,16 @@ class CreateInfoSiswasTable extends Migration
     public function up()
     {
         Schema::create('info_siswa', function (Blueprint $table) {
-            $table->id();
-            $table->integer('id_siswa');
+            $table->uuid('id')->primary();
+            $table->uuid('id_siswa');
+            // $table->integer('id_siswa');
             $table->string('nomor_induk')->nullable();
             $table->string('nomor_hp')->nullable();
             $table->string('agama')->nullable();
+            $table->string('nomor_wa')->nullable();
             $table->string('alamat')->nullable();
-            $table->integer('id_orangtua')->nullable();
+            $table->uuid('id_orangtua')->nullable();
+            // $table->integer('id_orangtua')->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();
         });

@@ -3,22 +3,23 @@
 const siswaMenu = [
   {
     url: "/dashboard",
-    name: "Homeasa",
+    name: "Home",
     slug: "dashboard",
     icon: "HomeIcon",
   },
   {
-    url: "/page2",
-    name: "Page 2",
-    slug: "page2",
+    url: "/materi",
+    name: "Materi",
+    slug: "siswa-materi",
     icon: "FileIcon",
   },
   {
-    url: "/page2",
-    name: "Page 2",
-    slug: "page2",
+    url: "/evaluasi",
+    name: "Ujian",
+    slug: "siswa-ujian",
     icon: "FileIcon",
-  }
+  },
+
 ]
 
 export default siswaMenu

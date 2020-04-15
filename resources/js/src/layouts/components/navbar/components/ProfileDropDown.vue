@@ -1,15 +1,30 @@
 <template>
-  <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo.displayName">
+  <div
+    class="the-navbar__user-meta flex items-center"
+    v-if="activeUserInfo.name"
+  >
 
     <div class="text-right leading-tight hidden sm:block">
-      <p class="font-semibold">{{ activeUserInfo.displayName }}</p>
+      <p class="font-semibold">{{ activeUserInfo.name }}</p>
       <small>Available</small>
     </div>
 
-    <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
+    <vs-dropdown
+      vs-custom-content
+      vs-trigger-click
+      class="cursor-pointer"
+    >
 
       <div class="con-img ml-3">
-        <img v-if="activeUserInfo.photoURL" key="onlineImg" :src="activeUserInfo.photoURL" alt="user-img" width="40" height="40" class="rounded-full shadow-md cursor-pointer block" />
+        <img
+          v-if="activeUserInfo.photoUrl"
+          key="onlineImg"
+          :src="activeUserInfo.photoUrl"
+          alt="user-img"
+          width="40"
+          height="40"
+          class="rounded-full shadow-md cursor-pointer block"
+        />
       </div>
 
       <vs-dropdown-menu class="vx-navbar-dropdown">
@@ -17,45 +32,69 @@
 
           <li
             class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-            @click="$router.push('/pages/profile').catch(() => {})">
-            <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
+            @click="$router.push('/pages/profile').catch(() => {})"
+          >
+            <feather-icon
+              icon="UserIcon"
+              svgClasses="w-4 h-4"
+            />
             <span class="ml-2">Profile</span>
           </li>
-
+<!--
           <li
             class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-            @click="$router.push('/apps/email').catch(() => {})">
-            <feather-icon icon="MailIcon" svgClasses="w-4 h-4" />
+            @click="$router.push('/apps/email').catch(() => {})"
+          >
+            <feather-icon
+              icon="MailIcon"
+              svgClasses="w-4 h-4"
+            />
             <span class="ml-2">Inbox</span>
           </li>
 
           <li
             class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-            @click="$router.push('/apps/todo').catch(() => {})">
-            <feather-icon icon="CheckSquareIcon" svgClasses="w-4 h-4" />
+            @click="$router.push('/apps/todo').catch(() => {})"
+          >
+            <feather-icon
+              icon="CheckSquareIcon"
+              svgClasses="w-4 h-4"
+            />
             <span class="ml-2">Tasks</span>
           </li>
 
           <li
             class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-            @click="$router.push('/apps/chat').catch(() => {})">
-            <feather-icon icon="MessageSquareIcon" svgClasses="w-4 h-4" />
+            @click="$router.push('/apps/chat').catch(() => {})"
+          >
+            <feather-icon
+              icon="MessageSquareIcon"
+              svgClasses="w-4 h-4"
+            />
             <span class="ml-2">Chat</span>
           </li>
 
           <li
             class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-            @click="$router.push('/apps/eCommerce/wish-list').catch(() => {})">
-            <feather-icon icon="HeartIcon" svgClasses="w-4 h-4" />
+            @click="$router.push('/apps/eCommerce/wish-list').catch(() => {})"
+          >
+            <feather-icon
+              icon="HeartIcon"
+              svgClasses="w-4 h-4"
+            />
             <span class="ml-2">Wish List</span>
-          </li>
+          </li> -->
 
           <vs-divider class="m-1" />
 
           <li
             class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-            @click="logout">
-            <feather-icon icon="LogOutIcon" svgClasses="w-4 h-4" />
+            @click="logout"
+          >
+            <feather-icon
+              icon="LogOutIcon"
+              svgClasses="w-4 h-4"
+            />
             <span class="ml-2">Logout</span>
           </li>
         </ul>
@@ -69,42 +108,50 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 export default {
-  data() {
+  data () {
     return {
 
     }
   },
   computed: {
-    activeUserInfo() {
+    activeUserInfo () {
       return this.$store.state.AppActiveUser
+
+
     }
   },
+  created () {
+    // console.log()
+  },
   methods: {
-    logout() {
+    logout () {
 
-        // if user is logged in via auth0
-        if (this.$auth.profile) this.$auth.logOut();
+      // // if user is logged in via auth0
+      // if (this.$auth.profile) this.$auth.logOut();
 
-        // if user is logged in via firebase
-        const firebaseCurrentUser = firebase.auth().currentUser
+      // // if user is logged in via firebase
+      // const firebaseCurrentUser = firebase.auth().currentUser
 
-        if (firebaseCurrentUser) {
-            firebase.auth().signOut().then(() => {
-                this.$router.push('/pages/login').catch(() => {})
-            })
-        }
-        // If JWT login
-        if(localStorage.getItem("accessToken")) {
-          localStorage.removeItem("accessToken")
-          this.$router.push('/pages/login').catch(() => {})
-        }
-
-        // Change role on logout. Same value as initialRole of acj.js
-        this.$acl.change('admin')
+      // if (firebaseCurrentUser) {
+      //   firebase.auth().signOut().then(() => {
+      //     this.$router.push('/pages/login').catch(() => { })
+      //   })
+      // }
+      // // If JWT login
+      // if (localStorage.getItem("accessToken")) {
+      //   localStorage.removeItem("accessToken")
+      //   this.$router.push('/pages/login').catch(() => { })
+      // }
+      if (localStorage.getItem("userInfo")) {
         localStorage.removeItem('userInfo')
+        localStorage.removeItem('menuItem')
+        this.$router.push('/login').catch(() => { })
+      }
 
-        // This is just for demo Purpose. If user clicks on logout -> redirect
-        this.$router.push('/pages/login').catch(() => {})
+
+
+      // This is just for demo Purpose. If user clicks on logout -> redirect
+      // this.$router.push('/login').catch(() => { })
     },
   }
 }

@@ -14,13 +14,14 @@ class CreateMataPelajaransTable extends Migration
     public function up()
     {
         Schema::create('pelajaran', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('nama');
-            $table->string('kode')->nullable();
+            $table->uuid('kode')->nullable();
             $table->string('icon')->nullable();
             $table->string('deskripsi')->nullable();
-            $table->string('kode_materi')->nullable();
-            $table->integer('kode_pengajar')->nullable();
+            $table->uuid('kode_materi')->nullable();
+            // $table->string('kode_materi')->nullable();
+            $table->uuid('kode_pengajar')->nullable();
             $table->timestamps();
         });
     }

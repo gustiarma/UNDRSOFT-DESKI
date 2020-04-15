@@ -18,9 +18,13 @@ mix.js('resources/js/app.js', 'public/js')
     .browserSync("127.0.0.1:8000")
     .disableNotifications()
 
+
     /* Options */
     .options({
-        processCssUrls: false
+        processCssUrls: false,
+        devServer:{
+            port:'9000'
+        }
     })
     .webpackConfig({
         resolve: {

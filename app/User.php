@@ -15,8 +15,14 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
+    public $incrementing = false;
+
+
+
     protected $fillable = [
-        'name', 'email', 'password', 'level', 'api_token',
+        'name', 'email', 'password', 'level', 'api_token','nomor_hp'
     ];
 
     public $timestamps = false;
@@ -26,7 +32,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','updated_at','created_at'
+        'password', 'remember_token', 'updated_at', 'created_at'
     ];
 
     /**
@@ -36,6 +42,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'id' => 'string'
     ];
 
 
@@ -45,8 +52,14 @@ class User extends Authenticatable
         // return $this->belongsTo('App\Model\InfoSiswa');
     }
 
-    public function infoKelas(){
-        return $this->hasOne('App\Model\KelasRelasi','id_siswa','id');
+    public function infoKelas()
+    {
+        return $this->hasOne('App\Model\KelasRelasi', 'id_siswa', 'id');
+    }
+    protected $appends = array('photoUrl');
+    public function getPhotoUrlAttribute()
+    {
+        return 'https://i.pravatar.cc/300';
     }
 
 

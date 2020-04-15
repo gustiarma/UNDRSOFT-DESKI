@@ -3,9 +3,16 @@
     class="layout--main"
     :class="[layoutTypeClass, navbarClasses, footerClasses, {'no-scroll': isAppPage}]"
   >
-    <v-nav-menu :navMenuItems="sidebarMenu" title="Vuexy" parent=".layout--main" />
+    <v-nav-menu
+      :navMenuItems="sidebarMenu"
+      title="Guruku.id"
+      parent=".layout--main"
+    />
 
-    <div id="content-area" :class="[contentAreaClass, {'show-overlay': bodyOverlay}]">
+    <div
+      id="content-area"
+      :class="[contentAreaClass, {'show-overlay': bodyOverlay}]"
+    >
       <div id="content-overlay" />
 
       <!-- Navbar -->
@@ -18,7 +25,10 @@
         ]"
         />
 
-        <div style="height: 62px" v-if="navbarType === 'static'"></div>
+        <div
+          style="height: 62px"
+          v-if="navbarType === 'static'"
+        ></div>
 
         <h-nav-menu
           :class="[
@@ -64,8 +74,15 @@
                 />
 
                 <!-- DROPDOWN -->
-                <vs-dropdown vs-trigger-click class="ml-auto md:block hidden cursor-pointer">
-                  <vs-button radius icon="icon-settings" icon-pack="feather" />
+                <vs-dropdown
+                  vs-trigger-click
+                  class="ml-auto md:block hidden cursor-pointer"
+                >
+                  <vs-button
+                    radius
+                    icon="icon-settings"
+                    icon-pack="feather"
+                  />
 
                   <vs-dropdown-menu class="w-32">
                     <vs-dropdown-item>
@@ -126,7 +143,10 @@
                 />
               </back-to-top>
 
-              <transition :name="routerTransition" mode="out-in">
+              <transition
+                :name="routerTransition"
+                mode="out-in"
+              >
                 <router-view
                   :key="$route.fullPath"
                   @changeRouteTitle="changeRouteTitle"
@@ -153,6 +173,11 @@ import TheFooter from "@/layouts/components/TheFooter.vue";
 import themeConfig from "@/../themeConfig.js";
 import VNavMenu from "@/layouts/components/vertical-nav-menu/VerticalNavMenu.vue";
 
+// import menu
+import AdminMenu from '@/store/adminMenu.js'
+import GuruMenu from '@/store/guruMenu.js'
+import SiswaMenu from '@/store/siswaMenu.js'
+
 export default {
   components: {
     BackToTop,
@@ -162,7 +187,7 @@ export default {
     TheNavbarVertical,
     VNavMenu
   },
-  data() {
+  data () {
     return {
       footerType: themeConfig.footerType || "static",
       hideScrollToTop: themeConfig.hideScrollToTop,
@@ -181,43 +206,48 @@ export default {
     //   return this.navMenuItems = navMenuItems;
     //   console.log('watched')
     // },
-    checkLogin() {
+    checkLogin () {
       this.checkLogin;
     },
-    $route(to, from) {
+    $route (to, from) {
       alert("called it");
     },
-    $route() {
+    $route () {
       this.routeTitle = this.$route.meta.pageTitle;
     },
-    isThemeDark(val) {
+    isThemeDark (val) {
       const color = this.navbarColor == "#fff" && val ? "#10163a" : "#fff";
       this.updateNavbarColor(color);
     },
-    "$store.state.mainLayoutType"(val) {
+    "$store.state.mainLayoutType" (val) {
       this.setNavMenuVisibility(val);
     }
   },
   computed: {
-    sidebarMenu() {
-      try {
-       var xxx =   JSON.parse(localStorage.getItem("menuItem"));
-       var yyy =   Object.values(xxx)
+    sidebarMenu () {
+      var level = this.$store.state.AppActiveUser.level
+      return level == 'ADMIN' ? AdminMenu : level == 'GURU' ? GuruMenu : SiswaMenu;
+      /**
+       * local storage method
+       */
+      // try {
+      //   var xxx = JSON.parse(localStorage.getItem("menuItem"));
+      //   var yyy = Object.values(xxx)
 
-       return yyy
-      } catch (error) {
-        return []
-      }
+      //   return yyy
+      // } catch (error) {
+      //   return []
+      // }
 
     },
     // navMenuItemsWatch(){
     //   return this.navMenuItems
     // },
 
-    bodyOverlay() {
+    bodyOverlay () {
       return this.$store.state.bodyOverlay;
     },
-    contentAreaClass() {
+    contentAreaClass () {
       if (this.mainLayoutType === "vertical") {
         if (this.verticalNavMenuWidth == "default")
           return "content-area-reduced";
@@ -228,26 +258,26 @@ export default {
       // else if(this.mainLayoutType === "boxed") return "content-area-reduced"
       else return "content-area-full";
     },
-    footerClasses() {
+    footerClasses () {
       return {
         "footer-hidden": this.footerType == "hidden",
         "footer-sticky": this.footerType == "sticky",
         "footer-static": this.footerType == "static"
       };
     },
-    isAppPage() {
+    isAppPage () {
       return this.$route.meta.no_scroll;
     },
-    isThemeDark() {
+    isThemeDark () {
       return this.$store.state.theme == "dark";
     },
-    layoutTypeClass() {
+    layoutTypeClass () {
       return `main-${this.mainLayoutType}`;
     },
-    mainLayoutType() {
+    mainLayoutType () {
       return this.$store.state.mainLayoutType;
     },
-    navbarClasses() {
+    navbarClasses () {
       return {
         "navbar-hidden": this.navbarType == "hidden",
         "navbar-sticky": this.navbarType == "sticky",
@@ -255,31 +285,31 @@ export default {
         "navbar-floating": this.navbarType == "floating"
       };
     },
-    verticalNavMenuWidth() {
+    verticalNavMenuWidth () {
       return this.$store.state.verticalNavMenuWidth;
     },
-    windowWidth() {
+    windowWidth () {
       return this.$store.state.windowWidth;
     }
   },
   methods: {
-    changeRouteTitle(title) {
+    changeRouteTitle (title) {
       this.routeTitle = title;
     },
-    updateNavbar(val) {
+    updateNavbar (val) {
       if (val == "static")
         this.updateNavbarColor(this.isThemeDark ? "#10163a" : "#fff");
       this.navbarType = val;
     },
-    updateNavbarColor(val) {
+    updateNavbarColor (val) {
       this.navbarColor = val;
       if (val == "#fff") this.isNavbarDark = false;
       else this.isNavbarDark = true;
     },
-    updateFooter(val) {
+    updateFooter (val) {
       this.footerType = val;
     },
-    setNavMenuVisibility(layoutType) {
+    setNavMenuVisibility (layoutType) {
       if (
         (layoutType === "horizontal" && this.windowWidth >= 1200) ||
         (layoutType === "vertical" && this.windowWidth < 1200)
@@ -290,10 +320,10 @@ export default {
         this.$store.commit("TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE", true);
       }
     },
-    toggleHideScrollToTop(val) {
+    toggleHideScrollToTop (val) {
       this.hideScrollToTop = val;
     },
-    checkLogin() {
+    checkLogin () {
       var userToken = null;
       if (localStorage.getItem("userInfo")) {
         userToken = JSON.parse(localStorage.getItem("userInfo"));
@@ -312,7 +342,7 @@ export default {
     // }
   },
 
-  created() {
+  created () {
     this.checkLogin();
 
     // console.log(this.$store.state);

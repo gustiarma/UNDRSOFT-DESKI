@@ -1,7 +1,7 @@
 
 
 import siswaMenu from './siswaMenu.js'
-// import adminMenu from './adminMenu.js'
+import adminMenu from './adminMenu.js'
 import guruMenu from './guruMenu.js'
 
 
@@ -56,9 +56,9 @@ const actions = {
       commit('UPDATE_MENU_ITEM', siswaMenu)
 
     }
-    // else if (val == "ADMIN") {
-    //   commit('UPDATE_MENU_ITEM', adminMenu)
-    // }
+    else if (val == "ADMIN") {
+      commit('UPDATE_MENU_ITEM', adminMenu)
+    }
     else if (val == "GURU") {
       commit('UPDATE_MENU_ITEM', guruMenu)
 

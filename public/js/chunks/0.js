@@ -965,6 +965,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -1543,6 +1545,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1554,32 +1595,31 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.AppActiveUser;
     }
   },
+  created: function created() {// console.log()
+  },
   methods: {
     logout: function logout() {
-      var _this = this;
+      // // if user is logged in via auth0
+      // if (this.$auth.profile) this.$auth.logOut();
+      // // if user is logged in via firebase
+      // const firebaseCurrentUser = firebase.auth().currentUser
+      // if (firebaseCurrentUser) {
+      //   firebase.auth().signOut().then(() => {
+      //     this.$router.push('/pages/login').catch(() => { })
+      //   })
+      // }
+      // // If JWT login
+      // if (localStorage.getItem("accessToken")) {
+      //   localStorage.removeItem("accessToken")
+      //   this.$router.push('/pages/login').catch(() => { })
+      // }
+      if (localStorage.getItem("userInfo")) {
+        localStorage.removeItem('userInfo');
+        localStorage.removeItem('menuItem');
+        this.$router.push('/login')["catch"](function () {});
+      } // This is just for demo Purpose. If user clicks on logout -> redirect
+      // this.$router.push('/login').catch(() => { })
 
-      // if user is logged in via auth0
-      if (this.$auth.profile) this.$auth.logOut(); // if user is logged in via firebase
-
-      var firebaseCurrentUser = firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth().currentUser;
-
-      if (firebaseCurrentUser) {
-        firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth().signOut().then(function () {
-          _this.$router.push('/pages/login')["catch"](function () {});
-        });
-      } // If JWT login
-
-
-      if (localStorage.getItem("accessToken")) {
-        localStorage.removeItem("accessToken");
-        this.$router.push('/pages/login')["catch"](function () {});
-      } // Change role on logout. Same value as initialRole of acj.js
-
-
-      this.$acl.change('admin');
-      localStorage.removeItem('userInfo'); // This is just for demo Purpose. If user clicks on logout -> redirect
-
-      this.$router.push('/pages/login')["catch"](function () {});
     }
   }
 });
@@ -1699,6 +1739,50 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2391,6 +2475,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'v-nav-menu-item',
   props: {
@@ -2460,10 +2567,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layouts_components_TheFooter_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/layouts/components/TheFooter.vue */ "./resources/js/src/layouts/components/TheFooter.vue");
 /* harmony import */ var _themeConfig_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/../themeConfig.js */ "./resources/js/themeConfig.js");
 /* harmony import */ var _layouts_components_vertical_nav_menu_VerticalNavMenu_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/layouts/components/vertical-nav-menu/VerticalNavMenu.vue */ "./resources/js/src/layouts/components/vertical-nav-menu/VerticalNavMenu.vue");
+/* harmony import */ var _store_adminMenu_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/store/adminMenu.js */ "./resources/js/src/store/adminMenu.js");
+/* harmony import */ var _store_guruMenu_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/store/guruMenu.js */ "./resources/js/src/store/guruMenu.js");
+/* harmony import */ var _store_siswaMenu_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/store/siswaMenu.js */ "./resources/js/src/store/siswaMenu.js");
 var _watch;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2616,6 +2746,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+ // import menu
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2661,13 +2795,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }), _watch),
   computed: {
     sidebarMenu: function sidebarMenu() {
-      try {
-        var xxx = JSON.parse(localStorage.getItem("menuItem"));
-        var yyy = Object.values(xxx);
-        return yyy;
-      } catch (error) {
-        return [];
-      }
+      var level = this.$store.state.AppActiveUser.level;
+      return level == 'ADMIN' ? _store_adminMenu_js__WEBPACK_IMPORTED_MODULE_7__["default"] : level == 'GURU' ? _store_guruMenu_js__WEBPACK_IMPORTED_MODULE_8__["default"] : _store_siswaMenu_js__WEBPACK_IMPORTED_MODULE_9__["default"];
+      /**
+       * local storage method
+       */
+      // try {
+      //   var xxx = JSON.parse(localStorage.getItem("menuItem"));
+      //   var yyy = Object.values(xxx)
+      //   return yyy
+      // } catch (error) {
+      //   return []
+      // }
     },
     // navMenuItemsWatch(){
     //   return this.navMenuItems
@@ -4078,7 +4217,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("span", { staticClass: "vx-logo-text text-primary" }, [
-                  _vm._v("Vuexy")
+                  _vm._v("Guruku.id")
                 ])
               ],
               1
@@ -4611,7 +4750,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.activeUserInfo.displayName
+  return _vm.activeUserInfo.name
     ? _c(
         "div",
         { staticClass: "the-navbar__user-meta flex items-center" },
@@ -4621,7 +4760,7 @@ var render = function() {
             { staticClass: "text-right leading-tight hidden sm:block" },
             [
               _c("p", { staticClass: "font-semibold" }, [
-                _vm._v(_vm._s(_vm.activeUserInfo.displayName))
+                _vm._v(_vm._s(_vm.activeUserInfo.name))
               ]),
               _vm._v(" "),
               _c("small", [_vm._v("Available")])
@@ -4636,13 +4775,13 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "con-img ml-3" }, [
-                _vm.activeUserInfo.photoURL
+                _vm.activeUserInfo.photoUrl
                   ? _c("img", {
                       key: "onlineImg",
                       staticClass:
                         "rounded-full shadow-md cursor-pointer block",
                       attrs: {
-                        src: _vm.activeUserInfo.photoURL,
+                        src: _vm.activeUserInfo.photoUrl,
                         alt: "user-img",
                         width: "40",
                         height: "40"
@@ -4675,100 +4814,6 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "ml-2" }, [_vm._v("Profile")])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push("/apps/email").catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: { icon: "MailIcon", svgClasses: "w-4 h-4" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Inbox")])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push("/apps/todo").catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: {
-                            icon: "CheckSquareIcon",
-                            svgClasses: "w-4 h-4"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Tasks")])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push("/apps/chat").catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: {
-                            icon: "MessageSquareIcon",
-                            svgClasses: "w-4 h-4"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Chat")])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router
-                              .push("/apps/eCommerce/wish-list")
-                              .catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: { icon: "HeartIcon", svgClasses: "w-4 h-4" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [
-                          _vm._v("Wish List")
-                        ])
                       ],
                       1
                     ),
@@ -5448,7 +5493,7 @@ var render = function() {
               attrs: {
                 tabindex: "-1",
                 exact: "",
-                to: _vm.to,
+                to: { name: _vm.to },
                 target: _vm.target
               }
             },
@@ -5524,7 +5569,7 @@ var render = function() {
       _c("v-nav-menu", {
         attrs: {
           navMenuItems: _vm.sidebarMenu,
-          title: "Vuexy",
+          title: "Guruku.id",
           parent: ".layout--main"
         }
       }),

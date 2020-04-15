@@ -14,9 +14,12 @@ class KelasRelasi extends Migration
     public function up()
     {
         Schema::create('kelas_relasi', function (Blueprint $table) {
-            $table->id();
-            $table->integer('id_siswa');
-            $table->integer('id_kelas');
+            $table->uuid('id')->primary();
+            $table->uuid('id_siswa');
+            $table->uuid('id_kelas');
+
+            // $table->integer('id_siswa');
+            // $table->integer('id_kelas');
             $table->timestamps();
         });
     }

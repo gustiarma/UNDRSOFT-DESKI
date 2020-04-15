@@ -17,19 +17,19 @@ const mutations = {
 
   // Vertical NavMenu
 
-  TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE(state, value) {
+  TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE (state, value) {
     state.isVerticalNavMenuActive = value
   },
-  TOGGLE_REDUCE_BUTTON(state, val) {
+  TOGGLE_REDUCE_BUTTON (state, val) {
     state.reduceButton = val
   },
-  UPDATE_MAIN_LAYOUT_TYPE(state, val) {
+  UPDATE_MAIN_LAYOUT_TYPE (state, val) {
     state.mainLayoutType = val
   },
-  UPDATE_VERTICAL_NAV_MENU_ITEMS_MIN(state, val) {
+  UPDATE_VERTICAL_NAV_MENU_ITEMS_MIN (state, val) {
     state.verticalNavMenuItemsMin = val
   },
-  UPDATE_VERTICAL_NAV_MENU_WIDTH(state, width) {
+  UPDATE_VERTICAL_NAV_MENU_WIDTH (state, width) {
     state.verticalNavMenuWidth = width
   },
 
@@ -38,7 +38,7 @@ const mutations = {
 
   // VxAutoSuggest
 
-  UPDATE_STARRED_PAGE(state, payload) {
+  UPDATE_STARRED_PAGE (state, payload) {
 
     // find item index in search list state
     const index = state.navbarSearchAndPinList["pages"].data.findIndex((item) => item.url == payload.url)
@@ -61,11 +61,11 @@ const mutations = {
 
   // Navbar-Vertical
 
-  ARRANGE_STARRED_PAGES_LIMITED(state, list) {
+  ARRANGE_STARRED_PAGES_LIMITED (state, list) {
     const starredPagesMore = state.starredPages.slice(10)
     state.starredPages = list.concat(starredPagesMore)
   },
-  ARRANGE_STARRED_PAGES_MORE(state, list) {
+  ARRANGE_STARRED_PAGES_MORE (state, list) {
     let downToUp = false
     let lastItemInStarredLimited = state.starredPages[10]
     const starredPagesLimited = state.starredPages.slice(0, 10)
@@ -85,11 +85,11 @@ const mutations = {
   // UI
   // ////////////////////////////////////////////
 
-  TOGGLE_CONTENT_OVERLAY(state, val) { state.bodyOverlay = val },
-  UPDATE_PRIMARY_COLOR(state, val) { state.themePrimaryColor = val },
-  UPDATE_THEME(state, val) { state.theme = val },
-  UPDATE_WINDOW_WIDTH(state, width) { state.windowWidth = width },
-  UPDATE_WINDOW_SCROLL_Y(state, val) { state.scrollY = val },
+  TOGGLE_CONTENT_OVERLAY (state, val) { state.bodyOverlay = val },
+  UPDATE_PRIMARY_COLOR (state, val) { state.themePrimaryColor = val },
+  UPDATE_THEME (state, val) { state.theme = val },
+  UPDATE_WINDOW_WIDTH (state, width) { state.windowWidth = width },
+  UPDATE_WINDOW_SCROLL_Y (state, val) { state.scrollY = val },
 
 
   // /////////////////////////////////////////////
@@ -97,7 +97,7 @@ const mutations = {
   // /////////////////////////////////////////////
 
   // Updates user info in state and localstorage
-  UPDATE_USER_INFO(state, payload) {
+  UPDATE_USER_INFO (state, payload) {
 
     // Get Data localStorage
     let userInfo = JSON.parse(localStorage.getItem("userInfo")) || state.AppActiveUser
@@ -116,17 +116,18 @@ const mutations = {
     }
     // Store data in localStorage
     localStorage.setItem("userInfo", JSON.stringify(userInfo))
+    state.AppActiveUser = userInfo
   },
 
-  UPDATE_THEME(state, val) { state.theme = val },
-  UPDATE_MENU_ITEM(state, val) {
+  UPDATE_THEME (state, val) { state.theme = val },
+  UPDATE_MENU_ITEM (state, val) {
     let menuItem = JSON.parse(localStorage.getItem('userMenu')) || state.navMenuItems
     console.log(menuItem)
     state.navMenuItems = val
     localStorage.setItem("menuItem", JSON.stringify(val))
   },
-  UPDATE_LOGIN_STATUS(state, val) { state.isLoggedIn = val },
-  UPDATE_API_TOKEN(state, val) {
+  UPDATE_LOGIN_STATUS (state, val) { state.isLoggedIn = val },
+  UPDATE_API_TOKEN (state, val) {
     state.AppActiveUser.apiToken = val
   },
 

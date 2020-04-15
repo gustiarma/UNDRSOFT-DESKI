@@ -21,10 +21,12 @@ class UserSeeder extends Seeder
         $total = 30;
         // create guru dan siswa seeder
         $faker = Faker::create('id_ID');
+        echo "Create Siswa\n";
         for ($i = 0; $i < $total; $i++) {
             $idava = random_int(1, 70);
             $name = $faker->firstName() . ' ' . $faker->lastName();
-            $x =  new User;
+
+            $x =  new User(['id' => Str::uuid()]);
             $x->name = $name;
             $x->email = str_replace(' ', '', strtolower($name)) . '@' . $faker->safeEmailDomain;
             $x->level = 'SISWA';
@@ -32,26 +34,31 @@ class UserSeeder extends Seeder
             $x->api_token = Str::random(60);
             $x->save();
         }
+        echo "Create Orang Tua\n";
         for ($i = 0; $i < $total; $i++) {
             $idava = random_int(1, 70);
             $name = $faker->firstName() . ' ' . $faker->lastName();
-            $x =  new User;
+            $x =  new User(['id' => Str::uuid()]);
             $x->name = $name;
-            $x->email = str_replace(' ', '', strtolower($name)) . '@' . $faker->safeEmailDomain;
+            $x->email = str_replace(' ', '', strtolower($name)) . '@' . $faker  ->safeEmailDomain;
             $x->level = 'ORANGTUA';
             $x->password = Hash::make('password');
             $x->api_token = Str::random(60);
             $x->save();
         }
 
+        echo "Create Info Siswa\n";
         $ortulist = User::where('level', 'ORANGTUA')->get();
         foreach ($ortulist as $ortu) {
-            $ortu = new OrangTua;
+
+            $ortu =   new OrangTua(['id' => Str::uuid()]);
             $ortu->nomor_hp =  $faker->phoneNumber;
             $ortu->nomor_wa = $faker->phoneNumber;
             $ortu->alamat = $faker->streetAddress;
             $ortu->save();
+
         }
+
 
         $religion = array(
             'Islam', 'Kristen', 'Hindu', 'Budha', 'Konghucu'
@@ -59,9 +66,12 @@ class UserSeeder extends Seeder
 
 
         $x = 0;
+
+        echo "Create: id_siswa, nomor_hp,alamat,agama_foto,id_oragtua\n";
         foreach (User::where('level', 'SISWA')->get() as $user) {
 
-            $userInfo = new InfoSiswa;
+            $userInfo = new InfoSiswa(['id' => Str::uuid()]);
+
             $userInfo->id_siswa = $user->id;
             $userInfo->nomor_hp = $faker->phoneNumber;
             $userInfo->alamat = $faker->streetAddress;
@@ -75,7 +85,7 @@ class UserSeeder extends Seeder
 
         for ($i = 0; $i < 4; $i++) {
             $name = $faker->firstName() . ' ' . $faker->lastName();
-            $x =  new User;
+            $x =  new User(['id' => Str::uuid()]);
             $x->name = $name;
             $x->email = str_replace(' ', '', strtolower($name)) . '@' . $faker->safeEmailDomain;
             $x->level = 'GURU';
@@ -85,7 +95,7 @@ class UserSeeder extends Seeder
         }
         for ($i = 0; $i < 2; $i++) {
             $name = $faker->firstName() . ' ' . $faker->lastName();
-            $x =  new User;
+            $x =  new User(['id' => Str::uuid()]);
             $x->name = $name;
             $x->email = str_replace(' ', '', strtolower($name)) . '@' . $faker->safeEmailDomain;
             $x->level = 'ADMIN';

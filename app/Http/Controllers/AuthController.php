@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -17,14 +18,13 @@ class AuthController extends Controller
             return response([
                 'success' => true,
                 'api_token' => Auth::user()->api_token,
-                'user_data'=>Auth::user()
+                'user_data' => Auth::user()
             ], 200);
-        }else{
+        } else {
             return response([
                 'success' => false,
                 'api_token' => null
             ], 401);
-
         }
     }
 }

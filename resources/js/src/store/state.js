@@ -16,8 +16,9 @@ const userDefaults = {
 
 
 const state = {
-  AppActiveUser: userDefaults,
-  navMenuItems:navMenuItems,
+  AppActiveUser: localStorage.getItem('userInfo') != null ? JSON.parse(localStorage.getItem('userInfo')) : userDefaults,
+  UserInfo: localStorage.getItem('userInfo') != null ? JSON.parse(localStorage.getItem('userInfo')) : null,
+  navMenuItems: navMenuItems,
   isVerticalNavMenuActive: true,
   mainLayoutType: themeConfig.mainLayoutType || "vertical",
   navbarSearchAndPinList: navbarSearchAndPinList,

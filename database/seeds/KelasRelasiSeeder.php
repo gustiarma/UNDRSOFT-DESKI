@@ -3,6 +3,7 @@
 use App\User;
 use App\Model\KelasRelasi;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class KelasRelasiSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class KelasRelasiSeeder extends Seeder
         $siswa = User::all();
         foreach ($siswa as $siswa) {
             KelasRelasi::updateOrCreate([
+                'id'=>Str::uuid(),
                 'id_siswa' => $siswa->id,
                 'id_kelas' => $arrayKelas[array_rand($arrayKelas)],
             ]);

@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Auth;
 // });
 
 Auth::routes();
+Route::get('logout', function () {
+  Auth::logout();
+});
 Route::get('/{any}', 'HomeController@index')->where('any', '.*');
 
 // // Route::get('/home', 'HomeController@index')->name('home');
