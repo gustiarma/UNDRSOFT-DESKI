@@ -86,7 +86,7 @@
         "vuepress": "0.14.11",
         "vuesax": "^3.11.0",
         "vuex": "^3.1.1",
-        "xlsx": "^0.15.0"
+        "xlsx": "^0.17.0"
     },
     "dependencies": {
         "material-design-icons-iconfont": "^5.0.1",
